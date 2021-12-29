@@ -74,6 +74,9 @@
 		ctx.fillRect(400 - 40, 400 - 40, 80, 80);
 		ctx.fillRect(500 - 40, 250 - 40, 80, 80);
 		ctx.fillRect(700 - 40, 400 - 40, 80, 80);
+
+		let totalSteps = 0;
+
 		for (let i = 0; i < 1; i += .0005) {
 			var ray = {x: origin.x, y: origin.y};
 			var directionVector = {x: Math.cos(i * 2 * Math.PI), y: Math.sin(i * 2 * Math.PI)};
@@ -88,6 +91,8 @@
 				ray.y += directionVector.y * dist;	
 				ctx.lineTo(ray.x, ray.y);
 				ctx.stroke();
+
+				totalSteps++;
 	
 				if (dist < accuracy || ray.x > canvas.width() || ray.x < 0 || ray.y > canvas.height() || ray.y < 0) {
 					break;
@@ -96,7 +101,7 @@
 		}
 		var delta = Date.now() - startTime;
 		ctx.font = "15px Arial";
-		ctx.fillText(delta + " milliseconds", 5, 20);
+		ctx.fillText(delta + " milliseconds   " + (totalSteps + " steps"), 5, 20);
 	}
 
 	frame({offsetX: 21, offsetY: 300});
