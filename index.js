@@ -37,6 +37,7 @@
 		var distanceToMouse = Math.sqrt((ray.x - e.offsetX) ** 2 + (ray.y - e.offsetY) ** 2);
 		var directionVector = {x: (e.offsetX - ray.x) / distanceToMouse, y: (e.offsetY - ray.y) / distanceToMouse};
 
+		let stepsTaken = -1;
 		for (let i = 0; i < 100; i++) {
 			dist = Math.min(distanceToSquare(ray, 400, 400, 40), distanceToSquare(ray, 500, 250, 40), distanceToSquare(ray, 700, 400, 40));
 			ctx.strokeStyle = "red";
@@ -53,12 +54,19 @@
 			ctx.stroke();
 
 			if (dist < accuracy || ray.x > canvas.width() || ray.x < 0 || ray.y > canvas.height() || ray.y < 0) {
-				ctx.font = "15px Arial";
-				ctx.fillText(i + 1 + "steps", 5, 20);
+				stepsTaken = i + 1;
 				break;
 			}
 		}
+		ctx.font = "15px Arial";
+		if (stepsTaken === -1) {
+			ctx.fillText("100 steps", 5, 20);
+		}
+		else {
+			ctx.fillText(stepsTaken + " steps", 5, 20);
+		}
 	}
+
 	var frameAllDirections = () => {
 		var startTime = Date.now();
 		ctx.clearRect(0, 0, canvas.width(), canvas.height());
