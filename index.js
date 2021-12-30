@@ -21,7 +21,7 @@
 	// 	Math.sqrt((ray.x - (x + r)) ** 2 + (ray.y - (y - r)) ** 2),
 	// 	Math.sqrt((ray.x - (x + r)) ** 2 + (ray.y - (y + r)) ** 2));
 	
-	var distanceToSquare = (ray, x, y, r) => Math.hypot(...[Math.max(Math.abs(ray.x - x) - r, 0), Math.max(Math.abs(ray.y - y) - r, 0)]);
+	var distanceToSquare = (ray, x, y, r) => Math.hypot(Math.max(Math.abs(ray.x - x) - r, 0), Math.max(Math.abs(ray.y - y) - r, 0));
 
 	var frame = e => {
 		ctx.clearRect(0, 0, canvas.width(), canvas.height());
